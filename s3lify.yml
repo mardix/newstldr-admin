@@ -1,0 +1,45 @@
+# -----------------------------------------------------------------------------
+# S3lify
+# Simple script to deploy static/jamstack app to S3, with ACM, Cloudfront and Route53
+# To learn more: https://github.com/mardix/s3lify
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+
+#:: AWS credentials and region
+aws_region: us-east-1
+# aws_access_key_id: 
+# aws_secret_access_key: 
+
+#:: Site Info
+# The domain without the 'www.'. It will create the S3 bucket with it
+domain:  #'chenjanbe.com'
+
+# The directory containing the site to upload, from the CWD running s3now
+site_directory: ./.build
+
+# For working with SPA, point the error_file to 'index.html' 
+index_file: 'index.html' # index.html
+error_file: 'index.html' # error.html
+
+#:: Purge files.
+purge_files: True         # To delete all the files on S3
+
+
+#:: distribution
+# The type of distribution
+# s3 | s3-route53 | cloudfront
+# default: s3
+# s3: to deploy to s3 only
+# s3-route53: will deploy on s3 and set the domain on route-53
+# cloudfront: deploy on s3, set route53, set ACM for SSL and activate cloudfront 
+distribution: cloudfront
+
+#:: update_route53domains_dns
+# default: True
+# when true it will attempt to update the domain DNS with the route53 Name servers
+update_route53domains_dns: True
+
+#:: invalidate_cloudfront_objects
+# To invalidate cloudfront objects, so it can retrieve new contents
+invalidate_cloudfront_objects: True

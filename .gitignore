@@ -1,0 +1,7 @@
+*.py[co]
+__pycache__*
+.sass-cache
+.DS_Store
+.cache
+.build
+error.log

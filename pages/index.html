@@ -1,0 +1,55 @@
+---
+title: NewsTLDR::Admin
+---
+
+<div id="app">
+  <v-app>
+    <v-card flat>
+      <v-toolbar color="primary" dark extended flat> </v-toolbar>
+
+      <v-card class="mx-auto" max-width="90%" style="margin-top: -64px;">
+        <v-toolbar flat>
+          <v-toolbar-title>NewsTLDR::Admin</v-toolbar-title>
+
+          <div class="flex-grow-1"></div>
+
+          <v-toolbar-items v-if="!$store.state.auth.authenticated">
+            <v-btn text to="/login">Login</v-btn>
+          </v-toolbar-items>
+
+          <v-toolbar-items v-if="$store.state.auth.authenticated">
+            <v-btn text to="/posts">Posts</v-btn>
+            <v-btn text to="/feeds">Feed</v-btn>
+            <v-btn text to="/sources">Sources</v-btn>
+
+            <v-menu bottom left transition="slide-y-transition">
+              <template v-slot:activator="{ on }">
+                <v-btn icon v-on="on" >
+                  <v-icon dark class="material-icons">apps</v-icon>
+                </v-btn>
+              </template>
+  
+              <v-list>
+                <v-list-item @click="">
+                  <v-list-item-title @click="$router.push('/account')">My Account</v-list-item-title>
+                </v-list-item>
+                <v-list-item v-if="$store.state.auth.accountInfo.is_admin">
+                  <v-list-item-title>Users</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="">
+                  <v-list-item-title @click="logout">Logout</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-toolbar-items>
+        </v-toolbar>
+
+        <v-divider></v-divider>
+
+        <v-card-text>
+          <router-view></router-view>
+        </v-card-text>
+      </v-card>
+    </v-card>
+  </v-app>
+</div>
